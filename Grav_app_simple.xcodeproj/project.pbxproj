@@ -11,6 +11,17 @@
 		BFF806E229A700210001525B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF806E129A700210001525B /* ContentView.swift */; };
 		BFF806E429A700280001525B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BFF806E329A700280001525B /* Assets.xcassets */; };
 		BFF806E729A700280001525B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BFF806E629A700280001525B /* Preview Assets.xcassets */; };
+		BFF806EE29A701F80001525B /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF806ED29A701F80001525B /* CameraView.swift */; };
+		BFF806F029A702120001525B /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF806EF29A702120001525B /* ImagePicker.swift */; };
+		BFF806F229A7024B0001525B /* InformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF806F129A7024B0001525B /* InformationView.swift */; };
+		BFF806F429A702650001525B /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF806F329A702650001525B /* SearchView.swift */; };
+		BFF806F629A7028B0001525B /* SendData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF806F529A7028B0001525B /* SendData.swift */; };
+		BFF806F929A702BE0001525B /* ResultHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF806F829A702BE0001525B /* ResultHolder.swift */; };
+		BFF806FB29A702D70001525B /* ScanButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF806FA29A702D70001525B /* ScanButton.swift */; };
+		BFF806FD29A702F30001525B /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF806FC29A702F30001525B /* UIImageExtension.swift */; };
+		BFF806FF29A7032E0001525B /* MovieCropper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF806FE29A7032E0001525B /* MovieCropper.swift */; };
+		BFF8070129A704DA0001525B /* QRscanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF8070029A704DA0001525B /* QRscanner.swift */; };
+		BFF8070329A705D00001525B /* ConstHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF8070229A705D00001525B /* ConstHolder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +30,18 @@
 		BFF806E129A700210001525B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		BFF806E329A700280001525B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BFF806E629A700280001525B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		BFF806ED29A701F80001525B /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
+		BFF806EF29A702120001525B /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		BFF806F129A7024B0001525B /* InformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationView.swift; sourceTree = "<group>"; };
+		BFF806F329A702650001525B /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		BFF806F529A7028B0001525B /* SendData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendData.swift; sourceTree = "<group>"; };
+		BFF806F829A702BE0001525B /* ResultHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultHolder.swift; sourceTree = "<group>"; };
+		BFF806FA29A702D70001525B /* ScanButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanButton.swift; sourceTree = "<group>"; };
+		BFF806FC29A702F30001525B /* UIImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
+		BFF806FE29A7032E0001525B /* MovieCropper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCropper.swift; sourceTree = "<group>"; };
+		BFF8070029A704DA0001525B /* QRscanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRscanner.swift; sourceTree = "<group>"; };
+		BFF8070229A705D00001525B /* ConstHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstHolder.swift; sourceTree = "<group>"; };
+		BFF8070429A719250001525B /* Grav-app-simple-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Grav-app-simple-Info.plist"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,8 +74,15 @@
 		BFF806DE29A700210001525B /* Grav_app_simple */ = {
 			isa = PBXGroup;
 			children = (
+				BFF8070429A719250001525B /* Grav-app-simple-Info.plist */,
 				BFF806DF29A700210001525B /* Grav_app_simpleApp.swift */,
+				BFF806F729A702AA0001525B /* Extension */,
 				BFF806E129A700210001525B /* ContentView.swift */,
+				BFF806ED29A701F80001525B /* CameraView.swift */,
+				BFF806EF29A702120001525B /* ImagePicker.swift */,
+				BFF806F129A7024B0001525B /* InformationView.swift */,
+				BFF806F329A702650001525B /* SearchView.swift */,
+				BFF806F529A7028B0001525B /* SendData.swift */,
 				BFF806E329A700280001525B /* Assets.xcassets */,
 				BFF806E529A700280001525B /* Preview Content */,
 			);
@@ -65,6 +95,19 @@
 				BFF806E629A700280001525B /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		BFF806F729A702AA0001525B /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				BFF806F829A702BE0001525B /* ResultHolder.swift */,
+				BFF8070229A705D00001525B /* ConstHolder.swift */,
+				BFF8070029A704DA0001525B /* QRscanner.swift */,
+				BFF806FA29A702D70001525B /* ScanButton.swift */,
+				BFF806FC29A702F30001525B /* UIImageExtension.swift */,
+				BFF806FE29A7032E0001525B /* MovieCropper.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,8 +180,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BFF806F229A7024B0001525B /* InformationView.swift in Sources */,
+				BFF806FB29A702D70001525B /* ScanButton.swift in Sources */,
+				BFF806F629A7028B0001525B /* SendData.swift in Sources */,
+				BFF806FD29A702F30001525B /* UIImageExtension.swift in Sources */,
+				BFF806F929A702BE0001525B /* ResultHolder.swift in Sources */,
+				BFF806EE29A701F80001525B /* CameraView.swift in Sources */,
+				BFF8070329A705D00001525B /* ConstHolder.swift in Sources */,
+				BFF806F029A702120001525B /* ImagePicker.swift in Sources */,
+				BFF8070129A704DA0001525B /* QRscanner.swift in Sources */,
 				BFF806E229A700210001525B /* ContentView.swift in Sources */,
+				BFF806F429A702650001525B /* SearchView.swift in Sources */,
 				BFF806E029A700210001525B /* Grav_app_simpleApp.swift in Sources */,
+				BFF806FF29A7032E0001525B /* MovieCropper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -270,6 +324,10 @@
 				DEVELOPMENT_TEAM = FKLM5SV532;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Grav-app-simple-Info.plist";
+				INFOPLIST_KEY_NSCameraUsageDescription = "$(MARKETING_VERSION)";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "$(MARKETING_VERSION)";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -299,6 +357,10 @@
 				DEVELOPMENT_TEAM = FKLM5SV532;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Grav-app-simple-Info.plist";
+				INFOPLIST_KEY_NSCameraUsageDescription = "$(MARKETING_VERSION)";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "$(MARKETING_VERSION)";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
