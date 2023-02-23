@@ -14,7 +14,7 @@ struct QRReader: UIViewControllerRepresentable {
         let captureMetadataOutput = AVCaptureMetadataOutput()
         captureSession.addOutput(captureMetadataOutput)
         captureMetadataOutput.setMetadataObjectsDelegate(context.coordinator, queue: .main)
-        captureMetadataOutput.metadataObjectTypes = [AVMetadataObject.ObjectType.qr]
+        captureMetadataOutput.metadataObjectTypes = [.qr, .ean13] // add ean13 to scan barcode
         let previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
         previewLayer.frame = controller.view.frame
         controller.view.layer.addSublayer(previewLayer)
