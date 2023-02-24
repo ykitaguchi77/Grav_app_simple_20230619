@@ -101,6 +101,29 @@ struct Informations: View {
                 
             
             Spacer()
+        
+//            Button(action: {
+//                self.user.sourceType = UIImagePickerController.SourceType.camera
+//                self.user.equipmentVideo = true
+//                self.goTakePhoto = true /*またはself.show.toggle() */
+//                self.user.isSendData = false //撮影済みを解除
+//                ResultHolder.GetInstance().SetMovieUrls(Url: "")  //動画の保存先をクリア
+//            }) {
+//                HStack{
+//                    Image(systemName: "video")
+//                    Text("撮影")
+//                }
+//                    .foregroundColor(Color.white)
+//                    .font(Font.largeTitle)
+//            }
+//                .frame(minWidth:0, maxWidth:CGFloat.infinity, minHeight: 75)
+//                .background(Color.black)
+//                .padding()
+//            .sheet(isPresented: self.$goTakePhoto) {
+//                CameraPage(user: user)
+//            }
+        
+        
             Button(action: {
                 self.presentationMode.wrappedValue.dismiss()
                }
@@ -116,29 +139,6 @@ struct Informations: View {
                 .sheet(isPresented: self.$goTakePhoto) {
                     CameraPage(user: user)
                 }
-        
-        
-            Button(action: {
-                self.user.sourceType = UIImagePickerController.SourceType.camera
-                self.user.equipmentVideo = true
-                self.goTakePhoto = true /*またはself.show.toggle() */
-                self.user.isSendData = false //撮影済みを解除
-                ResultHolder.GetInstance().SetMovieUrls(Url: "")  //動画の保存先をクリア
-            }) {
-                HStack{
-                    Image(systemName: "video")
-                    Text("撮影")
-                }
-                    .foregroundColor(Color.white)
-                    .font(Font.largeTitle)
-            }
-                .frame(minWidth:0, maxWidth:CGFloat.infinity, minHeight: 75)
-                .background(Color.black)
-                .padding()
-            .sheet(isPresented: self.$goTakePhoto) {
-                CameraPage(user: user)
-            }
-        
         
     }
 }

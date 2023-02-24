@@ -21,9 +21,9 @@ import AVFoundation
 struct Imagepicker : UIViewControllerRepresentable {
     @Binding var show:Bool
     @Binding var image:Data
-    @State private var shutter: Bool = false
     
     var sourceType:UIImagePickerController.SourceType
+    var equipmentVideo:Bool
  
     func makeCoordinator() -> Imagepicker.Coodinator {
         
@@ -33,24 +33,30 @@ struct Imagepicker : UIViewControllerRepresentable {
     func makeUIViewController(context: UIViewControllerRepresentableContext<Imagepicker>) -> UIImagePickerController {
         
         let controller = UIImagePickerController()
-        controller.sourceType = sourceType
-        controller.delegate = context.coordinator
-        
-        //photo, movieモード選択
-        //controller.mediaTypes = ["public.image", "public.movie"]
-        controller.mediaTypes = ["public.movie"]
-        controller.cameraCaptureMode = .video // Default media type .photo vs .video
-        controller.videoQuality = .typeHigh
-        controller.cameraFlashMode = .off
-        controller.cameraDevice = .rear //or front
-        controller.allowsEditing = false
-        
-        //overlay image
-        let screenWidth = UIScreen.main.bounds.size.width
-        //controller.cameraOverlayView = CircleView(frame: CGRect(x: (screenWidth / 2) - 50, y: (screenWidth / 2) + 25, width: 100, height: 100))
-        
-        controller.cameraOverlayView = MergeView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: screenWidth*1.5))  //screenheightで定義すると、use_imageに描画が重なってしまいボタンが押せなくなるため小さくした
-        
+        if self.sourceType == .camera{
+            controller.sourceType = sourceType
+            controller.delegate = context.coordinator
+            
+            //photo, movieモード選択
+            //controller.mediaTypes = ["public.image", "public.movie"]
+            controller.mediaTypes = ["public.movie"]
+            controller.cameraCaptureMode = .video // Default media type .photo vs .video
+            controller.videoQuality = .typeHigh
+            controller.cameraFlashMode = .off
+            controller.cameraDevice = .rear //or front
+            controller.allowsEditing = false
+            
+            //overlay image
+            let screenWidth = UIScreen.main.bounds.size.width
+            //controller.cameraOverlayView = CircleView(frame: CGRect(x: (screenWidth / 2) - 50, y: (screenWidth / 2) + 25, width: 100, height: 100))
+            
+            controller.cameraOverlayView = MergeView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: screenWidth*1.5))  //screenheightで定義すると、use_imageに描画が重なってしまいボタンが押せなくなるため小さくした
+        }
+        else if self.sourceType == .photoLibrary{
+            controller.sourceType = sourceType
+            controller.delegate = context.coordinator
+            controller.mediaTypes = ["public.image", "public.movie"]
+        }
         return controller
     }
     

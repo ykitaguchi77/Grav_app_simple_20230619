@@ -127,7 +127,7 @@ struct SendData: View {
     //ResultHolderにテキストデータを格納
     public func SaveToResultHolder(){
         //var imagenum: String = String(user.imageNum)
-        ResultHolder.GetInstance().SetAnswer(q1: stringDate(), q2: user.hashid, q3: user.id, q4: self.numToString(num: self.user.imageNum), q5: self.user.side[user.selected_side], q6: self.user.hospitals[user.selected_hospital], q7: self.user.disease[user.selected_disease], q8: self.user.free_disease, q9: self.user.gender[user.selected_gender], q10: self.user.birthdate)
+        ResultHolder.GetInstance().SetAnswer(q1: stringDate(), q2: user.hashid, q3: user.id, q4: self.numToString(num: self.user.imageNum), q5: self.user.hospitals[user.selected_hospital], q6: self.user.disease[user.selected_disease], q7: self.user.free_disease)
     }
     
     public func stringDate()->String{
@@ -226,10 +226,8 @@ struct SendData: View {
         dateFormatter.locale = Locale(identifier: "en_US_POSIX")
         dateFormatter.timeZone = TimeZone(identifier: "Asia/Tokyo")
         let examDate = dateFormatter.string(from: self.user.date)
-        let kind = "SUMAHO"
-        let side = self.user.sideCode[user.selected_side]
         let imageNum = String(format: "%03d", self.user.imageNum)
-        let imageName = id + "_" + examDate + "_" + kind + "_" + side + "_" + imageNum
+        let imageName = id + "_" + examDate + "_" + imageNum
         //print(imageName)
         return imageName
     }

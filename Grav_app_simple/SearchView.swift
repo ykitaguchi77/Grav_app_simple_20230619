@@ -64,7 +64,7 @@ struct Search: View {
                             VStack{
                                 Text("date: \(items[idx].pq1)").frame(maxWidth: .infinity,alignment: .leading)
                                 Text("id: \(items[idx].pq3), num: \(items[idx].pq4)").frame(maxWidth: .infinity,alignment: .leading)
-                                Text("side: \(items[idx].pq5), disease: \(items[idx].pq7), \(items[idx].pq8)").frame(maxWidth: .infinity,alignment: .leading)
+                                Text("disease: \(items[idx].pq6)").frame(maxWidth: .infinity,alignment: .leading)
                             }
                                 
                             Spacer()
@@ -88,12 +88,10 @@ struct Search: View {
                                         user.hashid = items[tapidx].pq2
                                         user.id = items[tapidx].pq3
                                         user.imageNum = Int(items[tapidx].pq4)!
-                                        user.selected_side = user.side.firstIndex(where: { $0 == items[tapidx].pq5})!
-                                        user.selected_hospital = user.hospitals.firstIndex(where: { $0 == items[tapidx].pq6})!
-                                        user.selected_disease = user.disease.firstIndex(where: { $0 == items[tapidx].pq7})!
-                                        user.free_disease = items[tapidx].pq8
-                                        user.selected_gender = user.gender.firstIndex(where: { $0 == items[tapidx].pq9})!
-                                        user.birthdate = items[tapidx].pq10
+                                        user.selected_hospital = user.hospitals.firstIndex(where: { $0 == items[tapidx].pq5})!
+                                        user.selected_disease = user.disease.firstIndex(where: { $0 == items[tapidx].pq6})!
+                                        user.free_disease = items[tapidx].pq7
+ 
                                         LoadImages(name: imageName()) //imageNameはJOIR準拠の命名。画像をresultHolderに格納。
                                         self.user.isSendData = false //撮影済みを解除
                                         self.presentationMode.wrappedValue.dismiss()
@@ -152,10 +150,8 @@ struct Search: View {
         dateFormatter.locale = Locale(identifier: "en_US_POSIX")
         dateFormatter.timeZone = TimeZone(identifier: "Asia/Tokyo")
         let examDate = dateFormatter.string(from: self.user.date)
-        let kind = "SUMAHO"
-        let side = self.user.sideCode[user.selected_side]
         let imageNum = String(format: "%03d", self.user.imageNum)
-        let imageName = id + "_" + examDate + "_" + kind + "_" + side + "_" + imageNum
+        let imageName = id + "_" + examDate + "_" + imageNum
         //print(imageName)
         return imageName
     }
@@ -177,33 +173,27 @@ class SearchModel: ObservableObject, Identifiable {
     }
 
     public func getJson() -> [QuestionAnswerData] {
-        //ドキュメントフォルダ内のファイル内容を書き出し
-        let documentsURL = NSHomeDirectory() + "/Documents"
-        guard let fileNames = try? FileManager.default.contentsOfDirectory(atPath: documentsURL) else {
+        let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+
+        guard let fileNames = try? FileManager.default.contentsOfDirectory(atPath: documentsURL.path) else {
             print("no files")
             return [QuestionAnswerData]() //ファイルが無い場合は空の構造体を返す
         }
 
-        //ファイル内容を1つずつ展開してリストにする
-        var contents = [String]()
-        var JsonList = [QuestionAnswerData]() //QuestionAnswerDataの構造体定義はResultHolderにある
+        var JsonList = [QuestionAnswerData]()
 
         for fileName in fileNames {
-            try? contents.append(String(contentsOfFile: documentsURL + "/" + fileName, encoding: .utf8))
-        }
-
-        //リストを1つずつJson形式にして、その一部をリストの形に戻す
-        for num in (0 ..< contents.count) {
-
-            let contentData = contents[num].data(using: .utf8)!
-
-            let decoder = JSONDecoder()
-            guard let jsonData: QuestionAnswerData = try? decoder.decode(QuestionAnswerData.self, from: contentData) else {
-                fatalError("Failed to decode from JSON.")
-            }
+            let fileURL = documentsURL.appendingPathComponent(fileName)
+            let isJSONFile = fileURL.pathExtension == "json"
             
-            JsonList.append(jsonData)
+            if isJSONFile, let contents = try? String(contentsOf: fileURL, encoding: .utf8) {
+                guard let jsonData = try? JSONDecoder().decode(QuestionAnswerData.self, from: contents.data(using: .utf8)!) else {
+                    fatalError("Failed to decode from JSON.")
+                }
+                JsonList.append(jsonData)
+            }
         }
+
         JsonList.sort(by: {a, b -> Bool in return a.pq3 < b.pq3}) //日付を昇順に並べ替え
         JsonList.sort(by: {a, b -> Bool in return a.pq1 < b.pq1}) //IDを昇順に並べ替え
     return (JsonList)

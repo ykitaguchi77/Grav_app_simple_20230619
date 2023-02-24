@@ -22,6 +22,7 @@
 		BFF806FF29A7032E0001525B /* MovieCropper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF806FE29A7032E0001525B /* MovieCropper.swift */; };
 		BFF8070129A704DA0001525B /* QRscanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF8070029A704DA0001525B /* QRscanner.swift */; };
 		BFF8070329A705D00001525B /* ConstHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF8070229A705D00001525B /* ConstHolder.swift */; };
+		BFF8070629A81C3A0001525B /* convertJSONToCSV.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF8070529A81C3A0001525B /* convertJSONToCSV.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		BFF8070029A704DA0001525B /* QRscanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRscanner.swift; sourceTree = "<group>"; };
 		BFF8070229A705D00001525B /* ConstHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstHolder.swift; sourceTree = "<group>"; };
 		BFF8070429A719250001525B /* Grav-app-simple-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Grav-app-simple-Info.plist"; sourceTree = SOURCE_ROOT; };
+		BFF8070529A81C3A0001525B /* convertJSONToCSV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = convertJSONToCSV.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +103,7 @@
 			isa = PBXGroup;
 			children = (
 				BFF806F829A702BE0001525B /* ResultHolder.swift */,
+				BFF8070529A81C3A0001525B /* convertJSONToCSV.swift */,
 				BFF8070229A705D00001525B /* ConstHolder.swift */,
 				BFF8070029A704DA0001525B /* QRscanner.swift */,
 				BFF806FA29A702D70001525B /* ScanButton.swift */,
@@ -185,6 +188,7 @@
 				BFF806F629A7028B0001525B /* SendData.swift in Sources */,
 				BFF806FD29A702F30001525B /* UIImageExtension.swift in Sources */,
 				BFF806F929A702BE0001525B /* ResultHolder.swift in Sources */,
+				BFF8070629A81C3A0001525B /* convertJSONToCSV.swift in Sources */,
 				BFF806EE29A701F80001525B /* CameraView.swift in Sources */,
 				BFF8070329A705D00001525B /* ConstHolder.swift in Sources */,
 				BFF806F029A702120001525B /* ImagePicker.swift in Sources */,
@@ -325,9 +329,11 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Grav-app-simple-Info.plist";
+				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "$(MARKETING_VERSION)";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "$(MARKETING_VERSION)";
-				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "$(MARKETING_VERSION)";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Need photos for saving data";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -358,9 +364,11 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Grav-app-simple-Info.plist";
+				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "$(MARKETING_VERSION)";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "$(MARKETING_VERSION)";
-				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "$(MARKETING_VERSION)";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Need photos for saving data";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
