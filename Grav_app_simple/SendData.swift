@@ -218,7 +218,7 @@ struct SendData: View {
     }
     
 
-    //JOIRの画像命名
+    //画像命名
     public func imageName() -> String{
         let id = self.user.hashid
         let dateFormatter = DateFormatter()

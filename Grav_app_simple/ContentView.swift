@@ -211,12 +211,7 @@ struct ContentView: View {
                     CameraPage(user: user)
                 }
             }
-            
-            Button(action: {
-                        convertJSONToCSV()
-                    }) {
-                        Text("Convert JSON to CSV")
-                    }
+        
             
             
         }
