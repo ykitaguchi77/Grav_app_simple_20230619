@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BF4EBC1D2A3F4D9300F47185 /* ForStaffView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4EBC1C2A3F4D9300F47185 /* ForStaffView.swift */; };
 		BFF806E029A700210001525B /* Grav_app_simpleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF806DF29A700210001525B /* Grav_app_simpleApp.swift */; };
 		BFF806E229A700210001525B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF806E129A700210001525B /* ContentView.swift */; };
 		BFF806E429A700280001525B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BFF806E329A700280001525B /* Assets.xcassets */; };
@@ -26,6 +27,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BF4EBC1C2A3F4D9300F47185 /* ForStaffView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForStaffView.swift; sourceTree = "<group>"; };
 		BFF806DC29A700210001525B /* Grav_app_simple.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Grav_app_simple.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFF806DF29A700210001525B /* Grav_app_simpleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grav_app_simpleApp.swift; sourceTree = "<group>"; };
 		BFF806E129A700210001525B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 				BFF806ED29A701F80001525B /* CameraView.swift */,
 				BFF806EF29A702120001525B /* ImagePicker.swift */,
 				BFF806F129A7024B0001525B /* InformationView.swift */,
+				BF4EBC1C2A3F4D9300F47185 /* ForStaffView.swift */,
 				BFF806F329A702650001525B /* SearchView.swift */,
 				BFF806F529A7028B0001525B /* SendData.swift */,
 				BFF806E329A700280001525B /* Assets.xcassets */,
@@ -191,6 +194,7 @@
 				BFF8070629A81C3A0001525B /* convertJSONToCSV.swift in Sources */,
 				BFF806EE29A701F80001525B /* CameraView.swift in Sources */,
 				BFF8070329A705D00001525B /* ConstHolder.swift in Sources */,
+				BF4EBC1D2A3F4D9300F47185 /* ForStaffView.swift in Sources */,
 				BFF806F029A702120001525B /* ImagePicker.swift in Sources */,
 				BFF8070129A704DA0001525B /* QRscanner.swift in Sources */,
 				BFF806E229A700210001525B /* ContentView.swift in Sources */,

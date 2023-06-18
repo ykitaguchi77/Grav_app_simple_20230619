@@ -7,7 +7,6 @@
 //
 import SwiftUI
 
-//変数を定義
 struct Informations: View {
     @ObservedObject var user: User
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
@@ -15,130 +14,56 @@ struct Informations: View {
     @State private var goTakePhoto: Bool = false  //撮影ボタン
     @State private var temp = "" //スキャン結果格納用の変数
     @State private var isScanning = false
+    @State private var showAlert = false
 
-    
     var body: some View {
-        NavigationView{
-                Form{
-                    HStack{
-                        Text("入力日時")
-                        Text(self.user.date, style: .date)
-                    }
-                    
-                    
-                    Picker(selection: $user.selected_hospital,
-                               label: Text("施設")) {
-                        ForEach(0..<user.hospitals.count) {
-                            Text(self.user.hospitals[$0])
-                                 }
-                        }
-                       .onChange(of: user.selected_hospital) {_ in
-                           self.user.isSendData = false
-                           UserDefaults.standard.set(user.selected_hospital, forKey:"hospitaldefault")
-                       }
-                    
-                    //DatePicker("入力日時", selection: $user.date)
-                    
-                    HStack{
-                        Text("I D ")
-                        TextField("idを入力してください", text: $user.id)
-                            .keyboardType(.numbersAndPunctuation)
-                            .onChange(of: user.id) { _ in
-                                self.user.isSendData = false
-                            }
-                    }
-                    
-                    HStack{
-                        ScanButton(text: $user.id)
-                            .frame(width: 100, height: 30, alignment: .leading)
-                        
-                        Button(action: {
-                            self.isScanning = true
-                        }) {
-                            HStack
-                            {
-                                Image(systemName: "qrcode.viewfinder")
-                                Text("QRcode").font(.callout)
-                            }
-                        }
-                        .sheet(isPresented: self.$isScanning) {
-                            QRReader(text: $user.id, isScanning: $isScanning)
-                        }
-                    }
-                        
-
-                        
-                    
-                    
-                    HStack{
-                        Text("疾患")
-                        Picker(selection: $user.selected_disease,
-                                   label: Text("")) {
-                            ForEach(0..<user.disease.count) {
-                                Text(self.user.disease[$0])
-                                    }
-                            }
-                            .onChange(of: user.selected_disease) {_ in
-                                self.user.isSendData = false
-                                UserDefaults.standard.set(user.selected_disease, forKey:"diseasedefault")
-                                }
-                            .pickerStyle(SegmentedPickerStyle())
-                    }
-                    
-                    
-                    HStack{
-                        Text("自由記載欄")
-                        TextField("", text: $user.free_disease)
-                            .keyboardType(.default)
-                    }.layoutPriority(1)
-                    .onChange(of: user.free_disease) { _ in
+        VStack {
+            Spacer()
+            
+            Text("診察券番号を下の枠に入力してください")
+                .font(.largeTitle)
+                .fontWeight(.bold)
+                .foregroundColor(.purple)
+                .padding(.vertical, 20)
+                .padding(.horizontal, 40)
+                .background(
+                    RoundedRectangle(cornerRadius: 10)
+                        .fill(Color.yellow)
+                        .shadow(color: .gray, radius: 3, x: 0, y: 2)
+                )
+            
+            TextField("ここに入力", text: $user.id)
+                .font(.system(size: 60))
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .padding()
+                .keyboardType(.numberPad)
+                .onChange(of: user.id) { _ in
                     self.user.isSendData = false
-                    }
-                }.navigationTitle("患者情報入力")
-                .onAppear(){
-                 }
-            }
-                
+                }
             
             Spacer()
-        
-//            Button(action: {
-//                self.user.sourceType = UIImagePickerController.SourceType.camera
-//                self.user.equipmentVideo = true
-//                self.goTakePhoto = true /*またはself.show.toggle() */
-//                self.user.isSendData = false //撮影済みを解除
-//                ResultHolder.GetInstance().SetMovieUrls(Url: "")  //動画の保存先をクリア
-//            }) {
-//                HStack{
-//                    Image(systemName: "video")
-//                    Text("撮影")
-//                }
-//                    .foregroundColor(Color.white)
-//                    .font(Font.largeTitle)
-//            }
-//                .frame(minWidth:0, maxWidth:CGFloat.infinity, minHeight: 75)
-//                .background(Color.black)
-//                .padding()
-//            .sheet(isPresented: self.$goTakePhoto) {
-//                CameraPage(user: user)
-//            }
-        
-        
+            
             Button(action: {
-                self.presentationMode.wrappedValue.dismiss()
-               }
-                
-            ) {
+                if user.id.isEmpty {
+                    showAlert = true
+                } else {
+                    goTakePhoto.toggle()
+//                    self.presentationMode.wrappedValue.dismiss()
+                }
+            }) {
                 Text("保存")
                     .foregroundColor(Color.white)
                     .font(Font.largeTitle)
             }
-                .frame(minWidth:0, maxWidth:CGFloat.infinity, minHeight: 75)
-                .background(Color.black)
-                .padding()
-                .sheet(isPresented: self.$goTakePhoto) {
-                    CameraPage(user: user)
-                }
-        
+            .frame(minWidth:0, maxWidth:CGFloat.infinity, minHeight: 150)
+            .background(Color.black)
+            .padding()
+            .sheet(isPresented: self.$goTakePhoto) {
+                CameraPage(user: user)
+            }
+            .alert(isPresented: $showAlert) {
+                Alert(title: Text("エラー"), message: Text("IDを入力してください"), dismissButton: .default(Text("OK")))
+            }
+        }
     }
 }

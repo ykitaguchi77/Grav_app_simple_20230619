@@ -41,11 +41,8 @@ struct ContentView: View {
     @ObservedObject var user = User()
     @State private var goTakePhoto: Bool = false  //撮影ボタン
     @State private var isPatientInfo: Bool = false  //患者情報入力ボタン
-    @State private var goSendData: Bool = false  //送信ボタン
-    @State private var uploadData: Bool = false  //アップロードボタン
-    @State private var newPatient: Bool = false  //新規患者ボタン
-    @State private var goSearch: Bool = false  //検索ボタン
-    
+    @State private var forStaff: Bool = false  //スタッフ用画面に移行するボタン
+
     
     var body: some View {
         VStack(alignment:.center, spacing:0){
@@ -72,7 +69,7 @@ struct ContentView: View {
                 
             }) {
                 HStack{
-                    Image(systemName: "info.circle")
+                    Image(systemName: "person.text.rectangle")
                     Text("患者情報入力")
                 }
                     .foregroundColor(Color.white)
@@ -86,7 +83,33 @@ struct ContentView: View {
                 //こう書いておかないとmissing as ancestorエラーが時々でる
             }
             
-            HStack(spacing:-10){
+            
+                
+                
+                
+            //送信するとボタンの色が変わる演出
+            if self.user.isSendData {
+                Button(action: {
+                    self.user.sourceType = UIImagePickerController.SourceType.camera
+                    self.user.equipmentVideo = true
+                    self.goTakePhoto = true /*またはself.show.toggle() */
+                    self.user.isSendData = false //撮影済みを解除
+                    ResultHolder.GetInstance().SetMovieUrls(Url: "")  //動画の保存先をクリア
+                }) {
+                    HStack{
+                        Image(systemName: "video")
+                        Text("撮影済み")
+                    }
+                        .foregroundColor(Color.white)
+                        .font(Font.largeTitle)
+                }
+                    .frame(minWidth:0, maxWidth:CGFloat.infinity, minHeight: 75)
+                    .background(Color.blue)
+                    .padding()
+                .sheet(isPresented: self.$goTakePhoto) {
+                    CameraPage(user: user)
+                }
+            } else {
                 Button(action: {
                     self.user.sourceType = UIImagePickerController.SourceType.camera
                     self.user.equipmentVideo = true
@@ -107,110 +130,33 @@ struct ContentView: View {
                 .sheet(isPresented: self.$goTakePhoto) {
                     CameraPage(user: user)
                 }
-                
-                
-                
-                //送信するとボタンの色が変わる演出
-                if self.user.isSendData {
-                    Button(action: {self.goSendData = true /*またはself.show.toggle() */}) {
-                        HStack{
-                            Image(systemName: "square.and.arrow.up")
-                            Text("送信済み")
-                        }
-                            .foregroundColor(Color.white)
-                            .font(Font.largeTitle)
-                    }
-                        .frame(minWidth:0, maxWidth:CGFloat.infinity, minHeight: 75)
-                        .background(Color.blue)
-                        .padding()
-                    .sheet(isPresented: self.$goSendData) {
-                        SendData(user: user)
-                    }
-                } else {
-                    Button(action: { self.goSendData = true /*またはself.show.toggle() */ }) {
-                        HStack{
-                            Image(systemName: "square.and.arrow.up")
-                            Text("送信")
-                        }
-                            .foregroundColor(Color.white)
-                            .font(Font.largeTitle)
-                    }
-                        .frame(minWidth:0, maxWidth:CGFloat.infinity, minHeight: 75)
-                        .background(Color.black)
-                        .padding()
-                    .sheet(isPresented: self.$goSendData) {
-                        SendData(user: user)
-                    }
-                }
             }
+            
 
             
-            Button(action: { self.newPatient = true /*またはself.show.toggle() */ }) {
+            Button(action: {
+                //病院番号はアプリを落としても保存されるようにしておく
+                self.user.selected_hospital = UserDefaults.standard.integer(forKey: "hospitaldefault")
+                self.forStaff = true /*またはself.show.toggle() */
+                
+            }) {
                 HStack{
-                    Image(systemName: "stop.circle")
-                    Text("次患者")
+                    Image(systemName: "person.2.badge.gearshape.fill")
+                    Text("スタッフ用")
                 }
                     .foregroundColor(Color.white)
                     .font(Font.largeTitle)
             }
-            .alert(isPresented:$newPatient){
-                Alert(title: Text("データをクリアしますか？"), primaryButton:.default(Text("はい"),action:{
-                    //データの初期化
-                    self.user.date = Date()
-                    self.user.id = ""
-                    self.user.birthdate = ""
-                    self.user.imageNum = 0
-                    self.user.selected_gender = 0
-                    self.user.selected_side = 0
-                    self.user.selected_hospital = 0
-                    self.user.selected_disease = 0
-                    self.user.free_disease = ""
-                    self.user.isSendData = false
-                    self.user.ssmixpath = ""
-                }),
-                      secondaryButton:.destructive(Text("いいえ"), action:{}))
-                }
                 .frame(minWidth:0, maxWidth:CGFloat.infinity, minHeight: 75)
                 .background(Color.black)
                 .padding()
-            
-            
-            HStack(spacing:-10){
-                Button(action: {self.goSearch = true /*またはself.show.toggle() */}) {
-                    HStack{
-                        Image(systemName: "applepencil")
-                        Text("修正")
-                    }
-                    .foregroundColor(Color.white)
-                    .font(Font.largeTitle)
-                }
-                .frame(minWidth:0, maxWidth:160, minHeight: 75)
-                .background(Color.black)
-                .padding()
-                .sheet(isPresented: self.$goSearch) {
-                    Search(user: user)
-                }
-                
-                Button(action: {
-                    self.user.sourceType = UIImagePickerController.SourceType.photoLibrary
-                    self.user.isSendData = false //撮影済みを解除
-                    self.uploadData = true /*またはself.show.toggle() */
-                    
-                }) {
-                    HStack{
-                        Image(systemName: "folder")
-                        Text("Up")
-                    }
-                        .foregroundColor(Color.white)
-                        .font(Font.largeTitle)
-                }
-                    .frame(minWidth:0, maxWidth:200, minHeight: 75)
-                    .background(Color.black)
-                    .padding()
-                .sheet(isPresented: self.$uploadData) {
-                    CameraPage(user: user)
-                }
+            .sheet(isPresented: self.$forStaff) {
+                ForStaff(user: user)
+                //こう書いておかないとmissing as ancestorエラーが時々でる
             }
+            
+            
+            
         
             
             

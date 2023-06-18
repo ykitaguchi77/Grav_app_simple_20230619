@@ -35,12 +35,19 @@ struct SendData: View {
                             
                             
                             ZStack{
+//                                if ResultHolder.GetInstance().GetMovieUrls().isEmpty{
+//                                    VStack {
+//                                        Text("画像を撮影あるいはロードして下さい").padding()
+//                                            .foregroundColor(Color.red)
+//                                            .font(Font.title)
+//                                    }
                                 if ResultHolder.GetInstance().GetMovieUrls() == "" {
                                     GetImageStack(images: ResultHolder.GetInstance().GetUIImages(), shorterSide: GetShorterSide(screenSize: bodyView.size))
                                 }else{
                                     let player = AVPlayer(url: URL(string:ResultHolder.GetInstance().GetMovieUrls())!)
                                     VideoPlayer(player: player).frame(width: bodyView.size.width, height:bodyView.size.width)
                                 }
+                                
                                 
                             }
                             
@@ -95,6 +102,7 @@ struct SendData: View {
                     SaveToDoc()
                     self.user.isSendData = true
                     self.user.imageNum += 1 //画像番号を増やす
+                    print("user.imageNum: \(user.imageNum)")
                     self.presentationMode.wrappedValue.dismiss()
                })
                 {
